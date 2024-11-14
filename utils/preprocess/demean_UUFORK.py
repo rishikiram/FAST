@@ -67,7 +67,7 @@ from obspy import read
 
 # ------------------- INPUTS ------------------------------------------------
 fork_dir_raw = '/home/rootrish/FORK/raw/'
-fork_dir_detrend = '/home/rootish/FORK/detrend/'
+fork_dir_detrend = '/home/rootrish/FORK/detrend/'
 file_arr = sorted(glob.glob(fork_dir_raw+'*.mseed'))
 format_str = 'MSEED'
 
