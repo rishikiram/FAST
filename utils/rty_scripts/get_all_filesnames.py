@@ -42,5 +42,5 @@ if __name__ == "__main__":
    
     file_arr = sorted(glob.glob(os.path.join(DATA_DIR,'*.mseed')))
     temp_str = ',\n'
-    array_string = f"[{temp_str.join(f'"{ETB_DIR+os.path.basename(file)}"' for file in file_arr)}]"
+    array_string = f"[{temp_str.join(f'"{ETB_DIR+"/"+os.path.basename(file)}"' for file in file_arr)}]"
     print(array_string)
