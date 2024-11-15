@@ -1,8 +1,8 @@
 import os
 import glob
 import re
-DATA_DIR = "/Users/rishi/envitrace repos/SeisDetection/data/"
-ETB_DIR = "/home/rootrish/FAST/data/waveformsFORK/"
+DATA_DIR = "/home/rootrish/FAST/data/waveformsFORK"
+ETB_DIR =  "/home/rootrish/FAST/data/waveformsFORK"
 
 
 def rename_files_with_regex(folder_path, regex_pattern, replacement):
