@@ -40,8 +40,8 @@ if __name__ == '__main__':
 		"fp_params": fp_params}
 	
 	idx_config_fname = param_dir + "global_indices.json"
-	import json
-	with open('data.json', 'w', encoding='utf-8') as f:	json.dump(idx_config, f, ensure_ascii=False, indent=4)
+	# import json
+	# with open('data.json', 'w', encoding='utf-8') as f:	json.dump(idx_config, f, ensure_ascii=False, indent=4)
 	assert (os.path.isfile(idx_config_fname)), "no global_indices.json found in fp_param_dir"
 
 	process = subprocess.Popen((idxCommand % (idx_config_fname)),
