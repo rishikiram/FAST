@@ -28,7 +28,7 @@ if __name__ == '__main__':
 	for param in fp_params:
 		print("Fingerprinting %s" % param)
 		process = subprocess.Popen((fpCommand % (param)),
-			stdout=subprocess.PIPE, shell=True)
+			stdout=subprocess.PIPE, shell=True, cwd=base_dir)
 		output, error = process.communicate()
 		print(output.decode('UTF-8'))
 
@@ -43,8 +43,8 @@ if __name__ == '__main__':
 	import json
 	with open('data.json', 'w', encoding='utf-8') as f:	json.dump(idx_config, f, ensure_ascii=False, indent=4)
 	assert (os.path.isfile(idx_config_fname)), "no global_indices.json found in fp_param_dir"
-	
+
 	process = subprocess.Popen((idxCommand % (idx_config_fname)),
-			stdout=subprocess.PIPE, shell=True)
+			stdout=subprocess.PIPE, shell=True, cwd=base_dir)
 	output, error = process.communicate()
 
