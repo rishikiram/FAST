@@ -13,6 +13,7 @@ if __name__ == '__main__':
 		help='name of the global config file', default='config.json')
 	args = parser.parse_args()
 
+	assert (os.path.isfile(args.config)), "config path is not a file"
 	config = parse_json(args.config)
 
 	# Get fingerprint parameter files
@@ -37,7 +38,7 @@ if __name__ == '__main__':
 		"fp_param_dir": param_dir,
 		"fp_params": fp_params}
 	idx_config_fname = param_dir + "global_indices.json"
-	assert (parse_json(idx_config_fname) == idx_config), "Their code not mine) is silly and redundant"
+	assert (parse_json(idx_config_fname) == idx_config), "Their code (not mine) is silly and redundant"
 	assert (os.path.isfile(idx_config_fname)), "no global_indices.json found in fp_param_dir"
 	process = subprocess.Popen((idxCommand % (idx_config_fname)),
 			stdout=subprocess.PIPE, shell=True)
