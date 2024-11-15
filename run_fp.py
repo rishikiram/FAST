@@ -17,7 +17,7 @@ if __name__ == '__main__':
 
 	# Get fingerprint parameter files
 	fp_params = []
-	param_dir = "../" + config["io"]["fp_param_dir"]
+	param_dir = config["io"]["fp_param_dir"]
 	assert (os.path.isdir(param_dir)), "fp_param_dir in config.json is malformed"
 	fp_params = [param_dir + f for f in config["io"]["fp_params"]]
 
@@ -33,10 +33,11 @@ if __name__ == '__main__':
 	# Generate global index
 	idx_dir = get_global_index_dir(config)
 	print("Writing global index to %s" % idx_dir)
-	idx_config = {"index_folder": "../" + idx_dir,
+	idx_config = {"index_folder": idx_dir,
 		"fp_param_dir": param_dir,
 		"fp_params": fp_params}
 	idx_config_fname = param_dir + "global_indices.json"
+	assert (parse_json(idx_config_fname) == idx_config), "Their code not mine) is silly and redundant"
 	assert (os.path.isfile(idx_config_fname)), "no global_indices.json found in fp_param_dir"
 	process = subprocess.Popen((idxCommand % (idx_config_fname)),
 			stdout=subprocess.PIPE, shell=True)
