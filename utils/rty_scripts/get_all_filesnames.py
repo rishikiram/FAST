@@ -32,13 +32,13 @@ def rename_files_with_regex(folder_path, regex_pattern, replacement):
         print(f"Error: {str(e)}")
 
 if __name__ == "__main__":
-    rename_files_with_regex(DATA_DIR, r'timeseries_', 'Deci500.')
-    rename_files_with_regex(DATA_DIR, r'_pm', '-12-00-00')
-    rename_files_with_regex(DATA_DIR, r'_am', '-00-00-00')
-    rename_files_with_regex(DATA_DIR, r'.mseed', '.UU.FORK.01.GHZ.mseed')
-    single_digit = r'(?<!\d)(\d)(?!\d)'
-    insert_0 = r'0\1'
-    rename_files_with_regex(DATA_DIR, single_digit, insert_0)
+#    rename_files_with_regex(DATA_DIR, r'timeseries_', 'Deci500.')
+#    rename_files_with_regex(DATA_DIR, r'_pm', '-12-00-00')
+#    rename_files_with_regex(DATA_DIR, r'_am', '-00-00-00')
+#    rename_files_with_regex(DATA_DIR, r'.mseed', '.UU.FORK.01.GHZ.mseed')
+#    single_digit = r'(?<!\d)(\d)(?!\d)'
+#    insert_0 = r'0\1'
+#    rename_files_with_regex(DATA_DIR, single_digit, insert_0)
    
     file_arr = sorted(glob.glob(os.path.join(DATA_DIR,'*.mseed')))
     temp_str = ',\n'
