@@ -4,8 +4,8 @@ import subprocess
 import argparse
 from parse_config import *
 
-fpCommand= 'python gen_fp.py %s'
-idxCommand = 'python global_index.py %s'
+fpCommand= 'python fingerprint/gen_fp.py %s'
+idxCommand = 'python fingerprint/global_index.py %s'
 
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser()
@@ -17,6 +17,8 @@ if __name__ == '__main__':
 	config = parse_json(args.config)
 
 	base_dir = config["io"]["base_dir"]
+	chdir(base_dir)
+	
 	# Get fingerprint parameter files
 	fp_params = []
 	param_dir = os.path.join(base_dir, config["io"]["fp_param_dir"]) 
@@ -24,11 +26,10 @@ if __name__ == '__main__':
 	fp_params = [os.path.join(param_dir, f) for f in config["io"]["fp_params"]]
 
 	# Fingerprinting
-	chdir('fingerprint')
 	for param in fp_params:
 		print("Fingerprinting %s" % param)
 		process = subprocess.Popen((fpCommand % (param)),
-			stdout=subprocess.PIPE, shell=True, cwd=base_dir)
+			stdout=subprocess.PIPE, shell=True)
 		output, error = process.communicate()
 		print(output.decode('UTF-8'))
 
@@ -45,6 +46,6 @@ if __name__ == '__main__':
 	assert (os.path.isfile(idx_config_fname)), "no global_indices.json found in fp_param_dir"
 
 	process = subprocess.Popen((idxCommand % (idx_config_fname)),
-			stdout=subprocess.PIPE, shell=True, cwd=base_dir)
+			stdout=subprocess.PIPE, shell=True)
 	output, error = process.communicate()
 
