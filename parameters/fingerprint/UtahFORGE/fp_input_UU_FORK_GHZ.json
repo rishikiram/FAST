@@ -23,7 +23,7 @@
         "channel": "GHZ",
         "start_time": "24-04-02T00:00:00.0",
         "end_time": "24-04-19T00:00:00.0",
-        "folder": "../data/waveformsFORK/",
+        "folder": "data/waveformsFORK/",
         "fingerprint_files": [
             "/home/rootrish/FAST/data/waveformsFORKDeci500.2024-04-02-00-00-00.UU.FORK.01.GHZ.mseed",
             "/home/rootrish/FAST/data/waveformsFORKDeci500.2024-04-02-12-00-00.UU.FORK.01.GHZ.mseed",

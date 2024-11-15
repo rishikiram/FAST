@@ -9,7 +9,7 @@
 	},
 
 	"io": {
-		"base_dir": "data/",
+		"base_dir": "/home/rootrish/FAST",
 		"global_index_dir": "data/global_indices/",
 		"fp_param_dir": "parameters/fingerprint/UtahFORGE/",
 		"simsearch_param_dir": "parameters/simsearch/",

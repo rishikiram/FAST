@@ -11,7 +11,7 @@ def parse_json(param_json):
     return params
 
 def get_global_index_dir(param):
-    return param["io"]["base_dir"] + param["io"]["global_index_dir"]
+    return join(param["io"]["base_dir"] , param["io"]["global_index_dir"])
 
 def get_fp_dir(param):
 	return param['data']['folder'] + 'fingerprints/'
