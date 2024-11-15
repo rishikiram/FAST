@@ -1,6 +1,7 @@
 import os
 import glob
 import re
+# DATA_DIR = "/Users/rishi/envitrace repos/SeisDetection/data"
 DATA_DIR = "/home/rootrish/FAST/data/waveformsFORK"
 ETB_DIR =  "/home/rootrish/FAST/data/waveformsFORK"
 
@@ -39,6 +40,6 @@ if __name__ == "__main__":
     insert_0 = r'0\1'
     rename_files_with_regex(DATA_DIR, single_digit, insert_0)
    
-    file_arr = sorted(glob.glob(DATA_DIR+'*.mseed'))
-    array_string = f"[{',\n'.join(f'\"{ETB_DIR+os.path.basename(file)}\"' for file in file_arr)}]"
+    file_arr = sorted(glob.glob(os.path.join(DATA_DIR,'*.mseed')))
+    array_string = f"[{',\n'.join(f'"{ETB_DIR+os.path.basename(file)}"' for file in file_arr)}]"
     print(array_string)
