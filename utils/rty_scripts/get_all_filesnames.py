@@ -41,5 +41,6 @@ if __name__ == "__main__":
     rename_files_with_regex(DATA_DIR, single_digit, insert_0)
    
     file_arr = sorted(glob.glob(os.path.join(DATA_DIR,'*.mseed')))
-    array_string = f"[{',\n'.join(f'"{ETB_DIR+os.path.basename(file)}"' for file in file_arr)}]"
+    temp_str = ',\n'
+    array_string = f"[{temp_str.join(f'"{ETB_DIR+os.path.basename(file)}"' for file in file_arr)}]"
     print(array_string)
