@@ -10,8 +10,8 @@
 
 	"io": {
 		"base_dir": "data/",
-		"global_index_dir": "global_indices/",
-		"fp_param_dir": "parameters/fingerprint/UtahFORGE",
+		"global_index_dir": "data/global_indices/",
+		"fp_param_dir": "parameters/fingerprint/UtahFORGE/",
 		"simsearch_param_dir": "parameters/simsearch/",
 
 		"fp_params": ["fp_input_UU_FORK_GHZ.json"]
