@@ -1,0 +1,5 @@
+{
+	"index_folder": "data/global_indices/",
+	"fp_param_dir": "parameters/fingerprint/UtahFORGE",
+    "fp_params": ["fp_input_UU_FORK_GHZ.json"]
+}
