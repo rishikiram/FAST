@@ -2,7 +2,7 @@ import numpy as np
 
 # ---------------------------------------------------INPUTS --------------------------------------------
 det_dir = '../../data/network_detection/'
-network_file = '7sta_2stathresh_detlist_rank_by_peaksum.txt'
+network_file = 'TODO.txt'
 nsta = 7
 
 #det_dir = '/lfs/1/ceyoon/TimeSeries/HectorMine/network_detection/'

@@ -3,8 +3,8 @@ import numpy as np
 # ---------------------------------------------------INPUTS --------------------------------------------
 input_dir = '../../data/network_detection/'
 allfile_name = input_dir+'uniquestart_sorted_no_duplicates.txt'
-outfile_name = input_dir+'7sta_2stathresh_FinalUniqueNetworkDetectionTimes.txt'
-n_sta = 7
+outfile_name = input_dir+'TODO_FinalUniqueNetworkDetectionTimes.txt'
+n_sta = 1
 
 #input_dir = '/lfs/1/ceyoon/TimeSeries/HectorMine/network_detection/'
 #allfile_name = input_dir+'uniquestart_sorted_no_duplicates.txt'
