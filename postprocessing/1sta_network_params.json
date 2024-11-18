@@ -20,7 +20,7 @@
 
 	"io": {
 		"channel_vars": ["FORK_GHZ"],
-		"fname_template": "candidate_pairs_%s_combined.txt",
+		"fname_template": "candidate_pairs_%s_merged.txt",
 		"base_dir": "../data/",
 		"data_folder": "inputs_network/",
 		"out_folder": "network_detection/"
