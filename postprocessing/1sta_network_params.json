@@ -14,7 +14,7 @@
 	},
 
 	"performance": {
-		"partition_size": 68719476736,
+		"partition_size": 4294967296,
 		"num_cores": 16
 	},
 
