@@ -2,7 +2,7 @@ import obspy
 import obspy.clients.iris
 import tqdm
 import os.path
-DATA_DIR = "/home/rootrish/FORK"
+DATA_DIR = "/Users/rishi/envitrace repos/FAST/data/waveformsFORK"
 
 
 client = obspy.clients.iris.Client()
@@ -26,15 +26,23 @@ for d in tqdm.tqdm(range(2,19)):
     dt_mid = dt_start + 3600*12
     dt_end = dt_start + 3600*24
 
-    my_filters = ["decimate=100.0","bp=15,60", "demean"]
-    
-    if os.path.isfile(this_filename+"_00-00-00.UU.FORK.01.GHZ.mseed"):
-        print("skipping "+this_filename+"_00-00-00.UU.FORK.01.GHZ.mseed")
+    my_filters = ["decimate=200.0","bp=15,60", "demean"]
+
+    # Full Day
+    day_file_name = this_filename+".UU.FORK.01.GHZ.mseed"
+    if os.path.isfile(day_file_name):
+        print("skipping "+day_file_name)
     else:
-        st = client.timeseries("UU", "FORK", "01", "GHZ", dt_start, dt_mid, filter=my_filters, filename= this_filename+"_00-00-00.UU.FORK.01.GHZ.mseed", output = "miniseed")
+        st = client.timeseries("UU", "FORK", "01", "GHZ", dt_start, dt_end, filter=my_filters, filename= day_file_name, output = "miniseed")
     
-    if os.path.isfile(this_filename+"_12-00-00.UU.FORK.01.GHZ.mseed"):
-        print("skipping "+this_filename+"_12-00-00.UU.FORK.01.GHZ.mseed")
-    else:
-        st = client.timeseries("UU", "FORK", "01", "GHZ", dt_mid, dt_end, filter=my_filters, filename= this_filename+"_12-00-00.UU.FORK.01.GHZ.mseed", output = "miniseed")
+    # Half day
+    # if os.path.isfile(this_filename+"_00-00-00.UU.FORK.01.GHZ.mseed"):
+    #     print("skipping "+this_filename+"_00-00-00.UU.FORK.01.GHZ.mseed")
+    # else:
+    #     st = client.timeseries("UU", "FORK", "01", "GHZ", dt_start, dt_mid, filter=my_filters, filename= this_filename+"_00-00-00.UU.FORK.01.GHZ.mseed", output = "miniseed")
+    
+    # if os.path.isfile(this_filename+"_12-00-00.UU.FORK.01.GHZ.mseed"):
+    #     print("skipping "+this_filename+"_12-00-00.UU.FORK.01.GHZ.mseed")
+    # else:
+    #     st = client.timeseries("UU", "FORK", "01", "GHZ", dt_mid, dt_end, filter=my_filters, filename= this_filename+"_12-00-00.UU.FORK.01.GHZ.mseed", output = "miniseed")
     
