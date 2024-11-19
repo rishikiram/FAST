@@ -2,7 +2,7 @@ import obspy
 import obspy.clients.iris
 import tqdm
 import os.path
-DATA_DIR = "/Users/rishi/envitrace repos/SeisDetection/data"
+DATA_DIR = "/home/rootrish/FORK"
 
 
 client = obspy.clients.iris.Client()
@@ -20,19 +20,21 @@ client = obspy.clients.iris.Client()
 
 # TODO if you pull data again, you should add demean and detrend("linear")
 for d in tqdm.tqdm(range(2,19)):
-    this_filename = os.path.join(DATA_DIR, "timeseries_2024-04-"+str(d) )
+    this_filename = os.path.join(DATA_DIR, "Deci100.2024.0."+f"{d:02}")
     
     dt_start = obspy.UTCDateTime(2024,4,d,0,0,0)
     dt_mid = dt_start + 3600*12
     dt_end = dt_start + 3600*24
+
+    my_filters = ["decimate=100.0","bp=15,60", "demean"]
     
-    if os.path.isfile(this_filename+"_am.mseed"):
-        print("skipping "+this_filename+"_am.mseed")
+    if os.path.isfile(this_filename+"_00-00-00.UU.FORK.01.GHZ.mseed"):
+        print("skipping "+this_filename+"_00-00-00.UU.FORK.01.GHZ.mseed")
     else:
-        st = client.timeseries("UU", "FORK", "01", "GHZ", dt_start, dt_mid, filter=["decimate=500.0","bp=15,60"], filename= this_filename+"_am.mseed", output = "miniseed")
+        st = client.timeseries("UU", "FORK", "01", "GHZ", dt_start, dt_mid, filter=my_filters, filename= this_filename+"_00-00-00.UU.FORK.01.GHZ.mseed", output = "miniseed")
     
-    if os.path.isfile(this_filename+"_pm.mseed"):
-        print("skipping "+this_filename+"_pm.mseed")
+    if os.path.isfile(this_filename+"_12-00-00.UU.FORK.01.GHZ.mseed"):
+        print("skipping "+this_filename+"_12-00-00.UU.FORK.01.GHZ.mseed")
     else:
-        st = client.timeseries("UU", "FORK", "01", "GHZ", dt_mid, dt_end, filter=["decimate=500.0","bp=15,60"], filename= this_filename+"_pm.mseed", output = "miniseed")
+        st = client.timeseries("UU", "FORK", "01", "GHZ", dt_mid, dt_end, filter=my_filters, filename= this_filename+"_12-00-00.UU.FORK.01.GHZ.mseed", output = "miniseed")
     
