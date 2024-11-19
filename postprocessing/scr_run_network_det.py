@@ -22,7 +22,7 @@ from os.path import isfile, join, getsize
 
 # Dimension of the event dictionary entry in numpy format:
 # [dt, bbox * 4, station_id, diagonalKey, networkEventID, event_stats * 3]
-M = 1 + 4 + 1 + 1 + 1 + 3
+M = 1 + 4 + 1 + 1 + 1 + 3 
 
 ######################################################################### 
 ##                  Event-pair detection functions                     ##
@@ -124,6 +124,7 @@ def detection(args):
 
     # get events - create hash table
     pid_prefix = str(pid + process_counter.value * 1000)
+    print("PID %d calling p_triplet_to_diags on %d bytes" % (pid, bytes_to_read))
     diags = clouds.p_triplet_to_diags(fname, byte_pos,
         bytes_to_read, pid_prefix = pid_prefix,
         ivals_thresh = param["network"]["ivals_thresh"])
