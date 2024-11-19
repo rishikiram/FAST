@@ -2,7 +2,7 @@
 	"lsh_param": {
 		"ntbl": 100,
 		"nhash": 4,
-		"nvote": 2,
+		"nvote": 6,
 		"nthread": 8,
 		"npart": 1,
 		"repeat": 5
