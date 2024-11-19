@@ -1,5 +1,5 @@
 {
-	"index_folder": "../data/global_indices/",
+	"index_folder": "../data/global_indices_HM/",
 	"fp_param_dir": "../parameters/fingerprint/",
 	"fp_params": ["fp_input_CI_TPC_EHZ.json", "fp_input_CI_RMR_EHZ.json", "fp_input_CI_RMM_EHZ.json",
 		"fp_input_CI_HEC_BHE.json", "fp_input_CI_HEC_BHN.json", "fp_input_CI_HEC_BHZ.json",

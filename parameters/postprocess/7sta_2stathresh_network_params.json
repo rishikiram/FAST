@@ -22,7 +22,7 @@
 		"channel_vars": ["CDY", "CPM", "GTM", "HEC", "RMM", "RMR", "TPC"],
 		"fname_template": "candidate_pairs_%s_combined.txt",
 		"base_dir": "../data/",
-		"data_folder": "inputs_network/",
-		"out_folder": "network_detection/"
+		"data_folder": "inputs_network_HM/",
+		"out_folder": "network_detection_HM/"
 	}
 }
