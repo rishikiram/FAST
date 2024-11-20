@@ -109,8 +109,8 @@ def detection(args):
     cidx = args[2]
     fname = data_folder + detdata_filenames[cidx]
     eventpair_fname = '%s_byte_%d.npy' % (fname, byte_pos)
-    print("looking for %s" % eventpair_fname)
-    exit()
+    if nstations == 1:
+        eventpair_fname = '%s_byte_%d_event_pairs.npy' % (fname, byte_pos)
     if isfile(eventpair_fname):
         print("%s already exists; skipping..." % eventpair_fname)
         return eventpair_fname
@@ -126,7 +126,7 @@ def detection(args):
 
     # get events - create hash table
     pid_prefix = str(pid + process_counter.value * 1000)
-    print("PID %d calling p_triplet_to_diags on %d bytes" % (pid, bytes_to_read))
+    # print("PID %d calling p_triplet_to_diags on %d bytes" % (pid, bytes_to_read))
     diags = clouds.p_triplet_to_diags(fname, byte_pos,
         bytes_to_read, pid_prefix = pid_prefix,
         ivals_thresh = param["network"]["ivals_thresh"])
@@ -228,12 +228,15 @@ if __name__ == '__main__':
     #/ Single station network detection
     if nstations == 1:
         # get byte_positions corresponding to the single station
+        print("reading data from:\n",fnames)
+        
         event_dict = defaultdict(list)
         for fname in fnames:
             event_pairs = np.load(fname)
             for event in event_pairs:
                 event_dict[event[0]].append(event[1:])
 
+        print("and an event looks like:", event_dict[0])
         event_start, event_dt, event_stats, pair_list = event_resolution_single(
             event_dict, param["network"]["max_fp"])
         # TODO: Save to prettier formats
