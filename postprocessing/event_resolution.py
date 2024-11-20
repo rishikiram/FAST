@@ -160,7 +160,7 @@ def event_resolution_single(event_dict, max_fp, pairwise_info = True):
             event_stats[t2idx,2] += v
         if pairwise_info:
             pair_list[kidx,:] = [event_start[t1idx], event_start[t2idx], pk, v]
-
+    print("t2 was found out of bounds %d times" % num_skipped)
     return event_start, event_dt, event_stats, pair_list
 
 
