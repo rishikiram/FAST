@@ -228,15 +228,13 @@ if __name__ == '__main__':
     #/ Single station network detection
     if nstations == 1:
         # get byte_positions corresponding to the single station
-        print("reading data from:\n",fnames)
-        
+        # print("reading data from:\n",fnames)
         event_dict = defaultdict(list)
         for fname in fnames:
             event_pairs = np.load(fname)
             for event in event_pairs:
                 event_dict[event[0]].append(event[1:])
-
-        print("and an event looks like:", event_dict[0])
+                
         event_start, event_dt, event_stats, pair_list = event_resolution_single(
             event_dict, param["network"]["max_fp"])
         # TODO: Save to prettier formats

@@ -101,7 +101,7 @@ def event_resolution_single(event_dict, max_fp, pairwise_info = True):
     #/ get hashkeys
     keys = sorted(event_dict.keys())
     keylist = [q for q in keys if len(event_dict[q]) > 0]
-
+    print("an event looks like:", event_dict[keylist[0]])
     #/ get max similarity for each fingerprint index - fills gaps
     countval = np.zeros(max_fp, dtype=bool)
     for k in keylist:
@@ -134,9 +134,10 @@ def event_resolution_single(event_dict, max_fp, pairwise_info = True):
 
         print(np.shape(event_end))
         print(np.shape(event_start))
-        print(np.shape(t1))
-        print(np.shape(t2))
+        print(t1)
+        print(t2)
         print(np.where( (t1 <= event_end) & (t1>= event_start) ))
+        print(np.where( (t1 <= event_end) & (t1>= event_start) )[0])
         print("------------------")
 
         t1idx = np.where( (t1 <= event_end) & (t1>= event_start) )[0][0]
