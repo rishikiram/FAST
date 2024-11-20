@@ -7,6 +7,7 @@ try:
 except ImportError:
     izip = zip
 from os.path import getsize
+from random import random
 
 ######################################################################### 
 ##               functions                                            ##
@@ -53,6 +54,8 @@ class EventCloudExtractor:
             line = f.readline()
             line_start = f.tell()
             while line_start - byte_pos < bytes_to_read:
+                if random() < 0.0001:
+                    print("random number hit")
                 # no need to strip() since that's already done above
                 tmp = line.split()
                 if len(tmp) < 3:
