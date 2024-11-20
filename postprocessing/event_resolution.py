@@ -137,6 +137,7 @@ def event_resolution_single(event_dict, max_fp, pairwise_info = True):
         print(np.shape(t1))
         print(np.shape(t2))
         print(np.where( (t1 <= event_end) & (t1>= event_start) ))
+        print("------------------")
 
         t1idx = np.where( (t1 <= event_end) & (t1>= event_start) )[0][0]
         t2idx = np.where( (t2 <= event_end) & (t2>= event_start) )[0][0]
