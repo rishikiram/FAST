@@ -131,6 +131,13 @@ def event_resolution_single(event_dict, max_fp, pairwise_info = True):
         t1 = event_dict[k][0][1]
         t2 = t1 + event_dict[k][0][0] 
         pk, v = _get_eventpair_stats(event_dict[k])
+
+        print(np.shape(event_end))
+        print(np.shape(event_start))
+        print(np.shape(t1))
+        print(np.shape(t2))
+        print(np.where( (t1 <= event_end) & (t1>= event_start) ))
+
         t1idx = np.where( (t1 <= event_end) & (t1>= event_start) )[0][0]
         t2idx = np.where( (t2 <= event_end) & (t2>= event_start) )[0][0]
         if t1idx != t2idx: # ignores self-matches for computing stats
