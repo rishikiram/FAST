@@ -134,23 +134,22 @@ def event_resolution_single(event_dict, max_fp, pairwise_info = True):
         t2 = t1 + event_dict[k][0][0] 
         pk, v = _get_eventpair_stats(event_dict[k])
 
-        print(np.shape(event_end))
-        print(np.shape(event_start))
-        print(t1)
-        print(t2)
-        print(np.where( (t1 <= event_end) & (t1>= event_start) ))
-        print(np.where( (t1 <= event_end) & (t1>= event_start) )[0])
-        print(np.where( (t2 <= event_end) & (t2>= event_start) ))
-        print(np.where( (t2 <= event_end) & (t2>= event_start) )[0])
-        print("------------------")
-
-        if len(np.where( (t2 <= event_end) & (t2>= event_start) )[0]) == 0 or len(np.where( (t1 <= event_end) & (t1>= event_start) )[0]) == 0:
-            print("t2 or t1 out of bounds, found %d total" % num_skipped)
-            num_skipped += 1
-            continue
+        # print(np.shape(event_end))
+        # print(np.shape(event_start))
+        # print(t1)
+        # print(t2)
+        # print(np.where( (t1 <= event_end) & (t1>= event_start) ))
+        # print(np.where( (t1 <= event_end) & (t1>= event_start) )[0])
+        # print(np.where( (t2 <= event_end) & (t2>= event_start) ))
+        # print(np.where( (t2 <= event_end) & (t2>= event_start) )[0])
+        # print("------------------")
 
         t1idx = np.where( (t1 <= event_end) & (t1>= event_start) )[0][0]
-        t2idx = np.where( (t2 <= event_end) & (t2>= event_start) )[0][0]
+        if len(np.where( (t2 <= event_end) & (t2>= event_start) )[0]) == 0:
+            t2idx = max_fp - 1
+            num_skipped += 1
+        else:
+            t2idx = np.where( (t2 <= event_end) & (t2>= event_start) )[0][0]
 
         if t1idx != t2idx: # ignores self-matches for computing stats
             event_stats[t1idx,0] += 1    #/ number of event-pairs
