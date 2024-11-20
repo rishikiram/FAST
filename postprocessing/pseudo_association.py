@@ -67,10 +67,11 @@ class EventCloudExtractor:
                     line_start = f.tell()
                     continue
                 ivals = int(tmp[2])
-                if ivals < ivals_thresh:
+                if ivals < ivals_thresh: # TODO this might be broken, might not just be able to continue
                     line = f.readline()
                     line_start = f.tell()
                     continue
+
                 dt = int(tmp[0])
                 idx1 = int(tmp[1]) - dt
 
