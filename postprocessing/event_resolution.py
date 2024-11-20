@@ -130,6 +130,7 @@ def event_resolution_single(event_dict, max_fp, pairwise_info = True):
 
     #/ get pairwise detection info
     num_skipped = 0
+    print("max in event end is", max(event_end))
     for kidx, k in enumerate(keylist):
         t1 = event_dict[k][0][1]
         t2 = t1 + event_dict[k][0][0] 
