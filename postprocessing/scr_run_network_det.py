@@ -109,6 +109,8 @@ def detection(args):
     cidx = args[2]
     fname = data_folder + detdata_filenames[cidx]
     eventpair_fname = '%s_byte_%d.npy' % (fname, byte_pos)
+    print("looking for %s" % eventpair_fname)
+    exit()
     if isfile(eventpair_fname):
         print("%s already exists; skipping..." % eventpair_fname)
         return eventpair_fname
