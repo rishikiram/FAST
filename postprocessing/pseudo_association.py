@@ -56,7 +56,7 @@ class EventCloudExtractor:
             temp_time= time.time()
             while line_start - byte_pos < bytes_to_read:
                 if i % 100000 == 0:
-                    print("d% in 100000 passed in %d time" % i,time.time()-temp_time)
+                    print("d% in 100000 passed in %d time" % (i,time.time()-temp_time))
                     temp_time = time.time()
                 # no need to strip() since that's already done above
                 tmp = line.split()
