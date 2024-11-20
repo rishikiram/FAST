@@ -8,7 +8,7 @@
 		"min_dets": 4,
 		"min_sum_multiplier": 1,
 		"max_width": 8,
-		"ivals_thresh": 2,
+		"ivals_thresh": 6,
 		"nsta_thresh": 1,
 		"input_offset": 3
 	},
