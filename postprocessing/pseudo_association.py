@@ -52,13 +52,13 @@ class EventCloudExtractor:
             f.seek(byte_pos)
             line = f.readline()
             line_start = f.tell()
-            i = 0
-            temp_time= time.time()
+            # i = 0
+            # temp_time= time.time()
             while line_start - byte_pos < bytes_to_read:
-                i += 1
-                if i % 100000 == 0:
-                    print("%d in 100000 passed in %d time %d bytes in" % (i,time.time()-temp_time,line_start - byte_pos))
-                    temp_time = time.time()
+                # i += 1
+                # if i % 10000000 == 0:
+                #     print("%d in 10000000 passed in %d time %d bytes in" % (i,time.time()-temp_time,line_start - byte_pos))
+                #     temp_time = time.time()
                 # no need to strip() since that's already done above
                 tmp = line.split()
                 if len(tmp) < 3:
