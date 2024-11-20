@@ -7,7 +7,6 @@ try:
 except ImportError:
     izip = zip
 from os.path import getsize
-from random import random
 
 ######################################################################### 
 ##               functions                                            ##
@@ -53,9 +52,12 @@ class EventCloudExtractor:
             f.seek(byte_pos)
             line = f.readline()
             line_start = f.tell()
+            i = 0
+            temp_time= time.time()
             while line_start - byte_pos < bytes_to_read:
-                if random() < 0.0001:
-                    print("random number hit")
+                if i % 100000 == 0:
+                    print("d% in 100000 passed in %d time" % i,time.time()-temp_time)
+                    temp_time = time.time()
                 # no need to strip() since that's already done above
                 tmp = line.split()
                 if len(tmp) < 3:
