@@ -111,8 +111,8 @@ def event_resolution_single(event_dict, max_fp, pairwise_info = True):
         countval[min(t1):(max(t1)+1)] = 1
         countval[min(t2):(max(t2)+1)] = 1
 
-    event_start = np.where( (countval[1:] > 0) & (countval[:-1] == 0))[0] + 1
-    event_end   = np.where( (countval[1:] == 0) & (countval[:-1] > 0))[0] 
+    event_start = np.where( (countval[1:] > 0) & (countval[:-1] == 0))[0] + 1 # finds all 0's followed by a 1
+    event_end   = np.where( (countval[1:] == 0) & (countval[:-1] > 0))[0] + 1 # finds all 1's followed by a 0
     # Edge cases 
     if countval[0]: # Event at the beginning
         event_start = np.insert(event_start, 0, 0)
@@ -128,6 +128,7 @@ def event_resolution_single(event_dict, max_fp, pairwise_info = True):
         pair_list = None
 
     #/ get pairwise detection info
+    num_skipped = 0
     for kidx, k in enumerate(keylist):
         t1 = event_dict[k][0][1]
         t2 = t1 + event_dict[k][0][0] 
@@ -143,8 +144,13 @@ def event_resolution_single(event_dict, max_fp, pairwise_info = True):
         print(np.where( (t2 <= event_end) & (t2>= event_start) )[0])
         print("------------------")
 
+        if len(np.where( (t2 <= event_end) & (t2>= event_start) )[0]) == 0 or len(np.where( (t1 <= event_end) & (t1>= event_start) )[0]):
+            print("t2 or t1 out of bounds, found %d total" % num_skipped)
+            num_skipped += 1
+
         t1idx = np.where( (t1 <= event_end) & (t1>= event_start) )[0][0]
         t2idx = np.where( (t2 <= event_end) & (t2>= event_start) )[0][0]
+
         if t1idx != t2idx: # ignores self-matches for computing stats
             event_stats[t1idx,0] += 1    #/ number of event-pairs
             event_stats[t2idx,0] += 1
