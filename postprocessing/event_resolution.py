@@ -132,19 +132,19 @@ def event_resolution_single(event_dict, max_fp, pairwise_info = True):
     num_skipped = 0
     print("max in event end is", max(event_end))
     for kidx, k in enumerate(keylist):
-        t1 = event_dict[k][0][1]
+        t1 = min(event_dict[k][0][1], max(event_end))
         t2 = min(t1 + event_dict[k][0][0], max(event_end)) #TODO this might intorduce errors
         pk, v = _get_eventpair_stats(event_dict[k])
 
         # print(np.shape(event_end))
         # print(np.shape(event_start))
-        print(t1)
-        print(t2)
+        # print(t1)
+        # print(t2)
         # print(np.where( (t1 <= event_end) & (t1>= event_start) ))
         # print(np.where( (t1 <= event_end) & (t1>= event_start) )[0])
         # print(np.where( (t2 <= event_end) & (t2>= event_start) ))
         # print(np.where( (t2 <= event_end) & (t2>= event_start) )[0])
-        print("------------------")
+        # print("------------------")
 
         t1idx = np.where( (t1 <= event_end) & (t1>= event_start) )[0][0]
         t2idx = np.where( (t2 <= event_end) & (t2>= event_start) )[0][0]
