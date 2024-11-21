@@ -97,30 +97,20 @@ def prune_network_events(network_events, nsta_thresh):
 #            each event-pair so pairwise detection information is retained
 #
 def event_resolution_single(event_dict, max_fp, pairwise_info = True):
-
     #/ get hashkeys
     keys = sorted(event_dict.keys())
     keylist = [q for q in keys if len(event_dict[q]) > 0]
-    print("an event looks like:", event_dict[keylist[0]])
-    print("keylist size:", len(keylist))
-    print("max_fp %d" % max_fp)
     #/ get max similarity for each fingerprint index - fills gaps
     countval = np.zeros(max_fp, dtype=bool)
-    net_max_t1 = 0
-    net_max_t2 = 0
     for k in keylist:
         t1 = [x[1] for x in event_dict[k]]
         t2 = [x[0]+x[1] for x in event_dict[k]]
-        net_max_t1 = max(net_max_t1, max(t1))
-        net_max_t2 = max(net_max_t2, max(t2))
         countval[min(t1):(max(t1)+1)] = 1
         countval[min(t2):(max(t2)+1)] = 1
-    print("net maxes:\n%d\n%d" % (net_max_t1,net_max_t2))
 
     event_start = np.where( (countval[1:] > 0) & (countval[:-1] == 0))[0] + 1 # finds all 0's followed by a 1
     event_end   = np.where( (countval[1:] == 0) & (countval[:-1] > 0))[0] # finds all 1's followed by a 0
-    print(event_start[0:100],"\n--------")
-    print(event_end[0:100])
+
     # Edge cases 
     if countval[0]: # Event at the beginning
         event_start = np.insert(event_start, 0, 0)
@@ -137,21 +127,10 @@ def event_resolution_single(event_dict, max_fp, pairwise_info = True):
 
     #/ get pairwise detection info
     num_skipped = 0
-    print("max in event end is", max(event_end))
     for kidx, k in enumerate(keylist):
-        t1 = min(event_dict[k][0][1], max(event_start))
-        t2 = min(t1 + event_dict[k][0][0], max(event_end)) #TODO this might intorduce errors
+        t1 = event_dict[k][0][1]
+        t2 = t1 + event_dict[k][0][0]
         pk, v = _get_eventpair_stats(event_dict[k])
-
-        # print(np.shape(event_end))
-        # print(np.shape(event_start))
-        # print(t1)
-        # print(t2)
-        # print(np.where( (t1 <= event_end) & (t1>= event_start) ))
-        # print(np.where( (t1 <= event_end) & (t1>= event_start) )[0])
-        # print(np.where( (t2 <= event_end) & (t2>= event_start) ))
-        # print(np.where( (t2 <= event_end) & (t2>= event_start) )[0])
-        # print("------------------")
 
         t1idx = np.where( (t1 <= event_end) & (t1>= event_start) )[0][0]
         t2idx = np.where( (t2 <= event_end) & (t2>= event_start) )[0][0]
