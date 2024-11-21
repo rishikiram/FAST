@@ -35,8 +35,8 @@ print(len(det_times))
 
 # Window length (seconds) for event plot
 init_time = UTCDateTime('2024-04-02T00:00:04.150000') # global start time for all channels
-wtime_before = 0
-wtime_after = 0
+wtime_before = 30
+wtime_after = 30
 
 # Plot dimensions
 out_width = 400
@@ -60,5 +60,5 @@ for kk in range(IND_FIRST, IND_LAST):
 
    st_slice = st.slice(start_time, end_time)
 
-   out_file = out_dir+'event_rank'+format(kk,'05d')+'_peaksum'+str(int(peaksum[kk]))+'_ind'+str(int(det_start_ind[kk]))+'_time'+str(det_times[kk])+'_'+ev_time.strftime('%Y-%m-%dT%H:%M:%S.%f')+'.png'
+   out_file = out_dir+'event_rank'+format(kk,'05d')+'_peaksum'+str(int(peaksum[kk]))+'_ind'+str(int(det_start_ind[kk]))+'_time'+str(det_times[kk])+'_'+ev_time.strftime('%Y-%m-%dT%H:%M:%S.%f')+'_30pad.png'
    st_slice.plot(equal_scale=False, size=(out_width,out_height), outfile=out_file)
