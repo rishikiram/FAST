@@ -58,7 +58,7 @@ for kk in range(len(EQ_detections)):
     ev_time = init_time + det_times[kk]
     start_time = ev_time - wtime_before
     end_time = ev_time + wtime_after
-    print(kk, EQ_detections[kk].det_ts, start_time, end_time)
+    print(kk, start_time, end_time)
 
     i_load += 1
     
