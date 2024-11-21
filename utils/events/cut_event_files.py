@@ -58,7 +58,7 @@ for kk in range(len(EQ_detections)):
     ev_time = init_time + det_times[kk]
     start_time = ev_time - wtime_before
     end_time = ev_time + wtime_after
-    print(kk, start_time, end_time)
+    # print(kk, start_time, end_time)
 
     i_load += 1
     
@@ -67,7 +67,7 @@ for kk in range(len(EQ_detections)):
     for tr in st_slice:
         timestamp = str(ev_time.year).zfill(2) + str(ev_time.month).zfill(2) + str(ev_time.day).zfill(2) + str(ev_time.hour).zfill(2) + str(ev_time.minute).zfill(2) + str(ev_time.second).zfill(2)
 
-        output_file_name = out_dir + "/" + kk +'_'+ timestamp + '_' + str(det_times[kk]) + '_' + tr.stats.station + '_' + tr.stats.channel + '.sac'
+        output_file_name = out_dir + "/" + str(kk) +'_'+ timestamp + '_' + str(det_times[kk]) + '_' + tr.stats.station + '_' + tr.stats.channel + '.sac'
         tr.write(output_file_name, format='SAC')
 
 print ("Number of event waveforms loaded =", i_load) 
