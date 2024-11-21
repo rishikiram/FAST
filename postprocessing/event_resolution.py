@@ -106,11 +106,16 @@ def event_resolution_single(event_dict, max_fp, pairwise_info = True):
     print("max_fp %d" % max_fp)
     #/ get max similarity for each fingerprint index - fills gaps
     countval = np.zeros(max_fp, dtype=bool)
+    net_max_t1 = 0
+    net_max_t2 = 0
     for k in keylist:
         t1 = [x[1] for x in event_dict[k]]
         t2 = [x[0]+x[1] for x in event_dict[k]]
+        net_max_t1 = max(net_max_t1, max(t1))
+        net_max_t2 = max(net_max_t2, max(t2))
         countval[min(t1):(max(t1)+1)] = 1
         countval[min(t2):(max(t2)+1)] = 1
+    print("net maxes:\n%d\n%d" % (net_max_t1,net_max_t2))
 
     event_start = np.where( (countval[1:] > 0) & (countval[:-1] == 0))[0] + 1 # finds all 0's followed by a 1
     event_end   = np.where( (countval[1:] == 0) & (countval[:-1] > 0))[0] # finds all 1's followed by a 0
