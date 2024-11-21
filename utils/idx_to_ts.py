@@ -45,7 +45,7 @@ if __name__ == '__main__':
 		index_count.append([fname, num_lines])
 		time += INTERVAL
 
-	print index_count
+	print(index_count)
 
 	fin = open(idx_fname, 'r')
 	fout = open('timestamps.txt', 'w')

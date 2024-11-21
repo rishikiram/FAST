@@ -13,20 +13,22 @@ def reorder_matrix(input_file, output_file, column_index, reverse=False):
     """
     # Load the file into a pandas DataFrame
     try:
-        df = pd.read_csv(input_file, delim_whitespace=True, header=None)
+        df = pd.read_csv(input_file, sep=r",")
     except Exception as e:
         print(f"Error reading file: {e}")
         return
 
+    # print(df[0:10])
     # Sort the DataFrame by the specified column
     try:
-        sorted_df = df.sort_values(by=column_index, ascending=(not reverse))
+        sorted_df = df.sort_values(by=df.keys()[column_index], ascending=(not reverse))
     except KeyError:
         print(f"Error: Column index {column_index} is out of range.")
         return
 
+    # print(sorted_df[0:10])
     # Save the sorted DataFrame back to a file
-    sorted_df.to_csv(output_file, sep=' ', index=False, header=False)
+    sorted_df.to_csv(output_file, sep=',', index=False)
     print(f"Matrix sorted by column {column_index} and saved to {output_file}")
 
 

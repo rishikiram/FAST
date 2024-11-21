@@ -7,7 +7,7 @@ import os
 from matplotlib import rcParams
 
 rcParams['pdf.fonttype'] = 42
-print(rcParams['pdf.fonttype'])
+# print(rcParams['pdf.fonttype'])
 
 
 if len(sys.argv) != 3:
@@ -20,9 +20,9 @@ print("PROCESSING:", IND_FIRST, IND_LAST)
    
 
 # Inputs
-times_dir = '../../data/network_detection/'
-event_file = "1sta_1stathresh_FORK_GHZ_events.txt"
-[det_start_ind, diff_ind, nevents, peaksum, tot_vol] = np.loadtxt(times_dir+event_file, usecols=(0,1,2,3,4), unpack=True)
+times_dir = './data/network_detection/'
+event_file = "1sta_1stathresh_FORK_GHZ_events_byvol.txt"
+[det_start_ind, diff_ind, nevents, peaksum, tot_vol] = np.loadtxt(times_dir+event_file, usecols=(0,1,2,3,4), unpack=True, skiprows=1, delimiter=',')
 out_dir = times_dir+'UU.FORK.GHZ_WaveformPlots/'
 if not os.path.exists(out_dir):
    os.makedirs(out_dir)
@@ -35,8 +35,8 @@ print(len(det_times))
 
 # Window length (seconds) for event plot
 init_time = UTCDateTime('2024-04-02T00:00:04.150000') # global start time for all channels
-wtime_before = 10
-wtime_after = 40
+wtime_before = 0
+wtime_after = 0
 
 # Plot dimensions
 out_width = 400
@@ -44,17 +44,19 @@ out_height = 800
 
 # Read in data and plot
 # Use filtered data for plotting
-ts_dir = '../../data/'
-st = read(ts_dir+'waveformsFORK/Deci500.*', format='MSEED')
+ts_dir = '../SeisDetection/data/'
+st = read(ts_dir+'Deci500.*', format='MSEED')
 print(len(st))
 print(st.__str__(extended=True))
 
 for kk in range(IND_FIRST, IND_LAST):
+   # if diff_times[kk]
    ev_time = init_time + det_times[kk]
    start_time = ev_time - wtime_before
-   end_time = ev_time + wtime_after
-   if (diff_times[kk] > wtime_after): # special case: unusually long delay between start and end times
-      end_time = ev_time + diff_times[kk] + wtime_after
+   end_time = ev_time + diff_times[kk] + wtime_after
+   # end_time = ev_time + wtime_after
+   # if (diff_times[kk] > wtime_after): # special case: unusually long delay between start and end times
+   #    end_time = ev_time + diff_times[kk] + wtime_after
 
    st_slice = st.slice(start_time, end_time)
 
