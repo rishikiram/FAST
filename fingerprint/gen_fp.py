@@ -71,4 +71,5 @@ if __name__ == '__main__':
 	ndim = fsize * 8 / nfp
 
 	# Save fingerprint stats
+	print("Saving fp_stats to", get_fp_fname(params))
 	save_fp_stats(params, nfp, ndim)
