@@ -20,9 +20,6 @@ import obspy
 # single_channel.plot(starttime = obspy.core.utcdatetime.UTCDateTime(2024,4,15,1,30),endtime = obspy.core.utcdatetime.UTCDateTime(2024,4,15,2,0))
 # single_channel.plot(starttime = obspy.core.utcdatetime.UTCDateTime(2024,4,15,9,20),endtime = obspy.core.utcdatetime.UTCDateTime(2024,4,15,9,30))
 
-single_channel = obspy.core.read("/Users/rishi/envitrace repos/SeisDetection/data/timeseries_2024-04-18_pm.mseed")
-single_channel.plot()
-single_channel.detrend(type='demean')
-single_channel.plot()
-single_channel.detrend(type='linear')
-single_channel.plot()
+single_channel = obspy.core.read("/Users/rishi/envitrace repos/SeisDetection/data/Deci500.2024-04-07-12-00-00.UU.FORK.01.GHZ.mseed")
+single_channel.plot(starttime = obspy.core.utcdatetime.UTCDateTime(2024,4,7,12,00),endtime = obspy.core.utcdatetime.UTCDateTime(2024,4,7,23,59))
+single_channel.plot(starttime = obspy.core.utcdatetime.UTCDateTime(2024,4,7,13,54),endtime = obspy.core.utcdatetime.UTCDateTime(2024,4,7,14,25))

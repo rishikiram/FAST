@@ -21,14 +21,14 @@ print("PROCESSING:", IND_FIRST, IND_LAST)
 
 # Inputs
 times_dir = './data/network_detection/'
-event_file = "1sta_1stathresh_FORK_GHZ_events_byvol.txt"
+event_file = "1sta_1stathresh_FORK_GHZ_events.txt"
 [det_start_ind, diff_ind, nevents, peaksum, tot_vol] = np.loadtxt(times_dir+event_file, usecols=(0,1,2,3,4), unpack=True, skiprows=1, delimiter=',')
 out_dir = times_dir+'UU.FORK.GHZ_WaveformPlots/'
 if not os.path.exists(out_dir):
    os.makedirs(out_dir)
 
 # Times
-dt_fp = 4 * 0.15 # from UU.FORK.GHZ.fingerprint.json
+dt_fp = 4 * 0.15 # 0.005 from UU.FORK.GHZ.fingerprint.json
 det_times = dt_fp * det_start_ind
 diff_times = dt_fp * diff_ind
 print(len(det_times))
