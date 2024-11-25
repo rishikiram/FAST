@@ -329,9 +329,6 @@ if __name__ == '__main__':
                         default=False, help="Whether to resume using *(x, y)_pairs_tmp files")
     args = parser.parse_args()
 
-    print("Resume = ", args.resume)
-    exit(1)
-    
     grand_start_time = time.time()
 
     # Get global index map
