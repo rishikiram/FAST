@@ -34,4 +34,4 @@ for file_path in glob.glob(f"{directory}/{pattern}"):
             is_good = True
     if not is_good:
         print("Removing %s"%file_path)
-        # os.remove(file_path)
+        os.remove(file_path)
