@@ -9,6 +9,7 @@ import subprocess
 from subprocess import Popen, PIPE
 import time
 import struct
+import gc
 
 MB_TO_BYTES = 1024 * 1024
 
@@ -148,6 +149,7 @@ def parse_chunk(tup):
         pairs_file_unfinished.close()
         os.rename(pairs_file_name+"_unfinished", pairs_file_name)
         print("Time to parse %s at (%d,%d):" % (filename, first_pos, last_pos), time.time() - start)
+    gc.collect()
     return pairs_file_name
 
 
