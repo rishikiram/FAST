@@ -112,7 +112,7 @@ def parse_chunk(tup):
     print("Parsing %s at (%d,%d)" % (filename, first_pos, last_pos))
     start = time.time()
     pairs_file_name = _get_pairs_fname("%s_(%d,%d)" % (filename, first_pos, last_pos))
-    if os.isfile(pairs_file_name):
+    if isfile(pairs_file_name):
         print("Using existing %s" % pairs_file_name)
     else:
         pairs_file_unfinished = open(pairs_file_name+"_unfinished", 'w')
