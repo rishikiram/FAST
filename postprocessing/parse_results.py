@@ -112,38 +112,42 @@ def parse_chunk(tup):
     print("Parsing %s at (%d,%d)" % (filename, first_pos, last_pos))
     start = time.time()
     pairs_file_name = _get_pairs_fname("%s_(%d,%d)" % (filename, first_pos, last_pos))
-    pairs_file = open(pairs_file_name, 'w')
-    with open(filename, 'rb') as f:
-        f.seek(last_pos + 4) # seek the position of the last count
-        last_count = struct.unpack('I', f.read(4))[0]
-        # size of chunk to read in bytes
-        read_size = last_pos + (last_count + 2) * 4 - first_pos
-        f.seek(first_pos)
-        buf = f.read(read_size)
-        a = np.frombuffer(buf, dtype=np.uint32)
-        i = 0
-        while i < len(a):
-            idx = a[i]
-            i += 1
-            counts = a[i]
-            i += 1
-            if args.idx:
-                global_idx = idx_map[idx]
-            for j in range(counts // 2):
-                # Only add things that are above specified thresholds
-                sim = a[i + j * 2 + 1]
-                idx2 = a[i + j * 2]
-                if args.thresh is None or sim >= args.thresh:
-                    # Map station fingerprint index to global index
-                    if args.idx:
-                        pairs_file.write('%d %d %d\n' %(
-                            abs(idx_map[idx2] - global_idx), max(idx_map[idx2], global_idx), sim))
-                    # Use station index
-                    else:
-                        pairs_file.write('%d %d %d\n' %(abs(idx2 - idx), max(idx2, idx), sim))
-            i += counts
-    pairs_file.close()
-    print("Time to parse %s at (%d,%d):" % (filename, first_pos, last_pos), time.time() - start)
+    if os.isfile(pairs_file_name):
+        print("Using existing %s" % pairs_file_name)
+    else:
+        pairs_file_unfinished = open(pairs_file_name+"_unfinished", 'w')
+        with open(filename, 'rb') as f:
+            f.seek(last_pos + 4) # seek the position of the last count
+            last_count = struct.unpack('I', f.read(4))[0]
+            # size of chunk to read in bytes
+            read_size = last_pos + (last_count + 2) * 4 - first_pos
+            f.seek(first_pos)
+            buf = f.read(read_size)
+            a = np.frombuffer(buf, dtype=np.uint32)
+            i = 0
+            while i < len(a):
+                idx = a[i]
+                i += 1
+                counts = a[i]
+                i += 1
+                if args.idx:
+                    global_idx = idx_map[idx]
+                for j in range(counts // 2):
+                    # Only add things that are above specified thresholds
+                    sim = a[i + j * 2 + 1]
+                    idx2 = a[i + j * 2]
+                    if args.thresh is None or sim >= args.thresh:
+                        # Map station fingerprint index to global index
+                        if args.idx:
+                            pairs_file_unfinished.write('%d %d %d\n' %(
+                                abs(idx_map[idx2] - global_idx), max(idx_map[idx2], global_idx), sim))
+                        # Use station index
+                        else:
+                            pairs_file_unfinished.write('%d %d %d\n' %(abs(idx2 - idx), max(idx2, idx), sim))
+                i += counts
+        pairs_file_unfinished.close()
+        os.rename(pairs_file_name+"_unfinished", pairs_file_name)
+        print("Time to parse %s at (%d,%d):" % (filename, first_pos, last_pos), time.time() - start)
     return pairs_file_name
 
 
@@ -276,8 +280,11 @@ def getfiles_and_cleanup(args):
     to_remove = []
     for f in os.listdir(args.dir):
         if args.prefix in f and isfile(join(args.dir, f)):
-            if 'tmp' in f or ('merged' in f and args.parse):
+            if 'unfinished' in f or ('merged' in f and args.parse):
                 to_remove.append(join(args.dir, f))
+            elif 'tmp' in f:
+                if not args.resume:
+                    to_remove.append(join(args.dir, f))
             else:
                 fnames.append(join(args.dir, f))
     for f in to_remove:
@@ -317,6 +324,9 @@ if __name__ == '__main__':
                         default=False,
                         help='whether to combine similarity for the same pair')
     parser.add_argument('-n', '--nprocs', type=int, default=2, help='number of processes')
+    parser.add_argument('-r',
+                        '--resume',type=str2bool, nargs='?',
+                        default=False, help="Whether to resume using *(x, y)_pairs_tmp files")
     args = parser.parse_args()
 
     grand_start_time = time.time()
